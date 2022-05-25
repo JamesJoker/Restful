@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using prjRESTful.Models;
 using System;
 using System.Collections.Generic;
@@ -23,32 +24,65 @@ namespace prjRESTful.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            var customers = _context.Customers.ToList();
+            yield return JsonConvert.SerializeObject(customers, Formatting.Indented);
         }
 
-        // GET api/<CustomerController>/5
+        // GET api/<CustomerController>/{id}
         [HttpGet("{id}")]
-        public string Get(int id)
+        public string Get(string id)
         {
-            return "value";
+            var customer = _context.Customers.FirstOrDefault(m => m.CustomerId == id);
+            return JsonConvert.SerializeObject(customer, Formatting.Indented);
         }
 
         // POST api/<CustomerController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public string Post([FromBody] Customer customer)
         {
+            try
+            {
+                _context.Customers.Add(customer);
+                _context.SaveChanges();
+                return "OK";
+            }
+            catch(Exception ex)
+            {
+                return ex.StackTrace;
+            }
         }
 
-        // PUT api/<CustomerController>/5
+        // PUT api/<CustomerController>/{id}
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public string Put(string id, [FromBody] Customer customer)
         {
+            try
+            {
+                _context.Customers.Update(customer);
+                _context.SaveChanges();
+                return "OK";
+            }
+            catch(Exception ex)
+            {
+                return ex.StackTrace;
+            }
         }
 
-        // DELETE api/<CustomerController>/5
+        // DELETE api/<CustomerController>/{id}
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public string Delete(string id)
         {
+            try
+            {
+                var customer = _context.Customers.FirstOrDefault(m => m.CustomerId == id);
+                _context.Remove(customer);
+                _context.SaveChanges();
+                return "OK";
+            }
+            catch(Exception ex)
+            {
+                return ex.StackTrace;
+            }
         }
     }
 }
