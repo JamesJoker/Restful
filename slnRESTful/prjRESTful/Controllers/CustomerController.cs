@@ -58,9 +58,18 @@ namespace prjRESTful.Controllers
         {
             try
             {
-                _context.Customers.Update(customer);
-                _context.SaveChanges();
-                return "OK";
+                var user = _context.Customers.FirstOrDefault(m => m.CustomerId == id);
+
+                if (user != null && user.CustomerId == customer.CustomerId)
+                {
+                    _context.Customers.Update(customer);
+                    _context.SaveChanges();
+                    return "OK";
+                }
+                else
+                {
+                    return "Please check information.";
+                }
             }
             catch(Exception ex)
             {
