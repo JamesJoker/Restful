@@ -22,10 +22,10 @@ namespace prjRESTful.Controllers
         }
         // GET: api/<CustomerController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public string Get()
         {
             var customers = _context.Customers.ToList();
-            yield return JsonConvert.SerializeObject(customers, Formatting.Indented);
+            return JsonConvert.SerializeObject(customers, Formatting.Indented);
         }
 
         // GET api/<CustomerController>/{id}
