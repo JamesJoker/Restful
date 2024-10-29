@@ -16,7 +16,7 @@ builder.Configuration
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var dataSourceBuilder = new NpgsqlDataSourceBuilder(builder.Configuration.GetConnectionString("PostgreSQL"));
+var dataSourceBuilder = new NpgsqlDataSourceBuilder(builder.Configuration.GetValue<string>("PostgreSQL"));
 dataSourceBuilder.UseNodaTime();
 var dataSource = dataSourceBuilder.Build();
 builder.Services.AddDbContextPool<HouseWorkListDbContext>(option =>
