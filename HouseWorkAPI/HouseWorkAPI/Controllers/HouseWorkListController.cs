@@ -1,4 +1,5 @@
 ﻿using HouseWorkAPI.Modules.Services;
+using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HouseWorkAPI.Controllers
@@ -13,7 +14,7 @@ namespace HouseWorkAPI.Controllers
         [Route("members")]
         public IActionResult Members()
         {
-            return Ok(_houseWorkService.Members);
+            return Ok(JsonConvert.SerializeObject(_houseWorkService.Members));
         }
     }
 }
