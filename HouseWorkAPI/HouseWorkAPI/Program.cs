@@ -15,6 +15,7 @@ builder.Configuration
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSystemd();
 
 var dataSourceBuilder = new NpgsqlDataSourceBuilder(builder.Configuration.GetValue<string>("PostgreSQL"));
 dataSourceBuilder.UseNodaTime();
