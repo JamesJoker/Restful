@@ -1,6 +1,7 @@
 using HouseWorkAPI.Modules.DbContexts;
 using HouseWorkAPI.Modules.Services;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,9 +15,12 @@ builder.Configuration
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+var dataSourceBuilder = new NpgsqlDataSourceBuilder(builder.Configuration.GetConnectionString("PostgreSQL"));
+dataSourceBuilder.UseNodaTime();
 builder.Services.AddDbContextPool<HouseWorkListDbContext>(option =>
 {
-    option.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQL"));
+    option.UseNpgsql(dataSourceBuilder.Build());
 });
 builder.Services.AddScoped<HouseWorkService>();
 
