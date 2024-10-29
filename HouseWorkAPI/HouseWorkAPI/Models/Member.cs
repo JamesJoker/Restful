@@ -1,0 +1,13 @@
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace HouseWorkAPI.Models
+{
+    [Table("members")]
+    public class Member
+    {
+        [Column("id")]
+        public int Id { get; set; }
+        [Column("name")]
+        public string Name { get; set; } = string.Empty;
+    }
+}
