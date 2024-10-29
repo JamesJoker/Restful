@@ -19,9 +19,8 @@ builder.Services.AddSwaggerGen();
 var dataSourceBuilder = new NpgsqlDataSourceBuilder(builder.Configuration.GetConnectionString("PostgreSQL"));
 dataSourceBuilder.UseNodaTime();
 builder.Services.AddDbContextPool<HouseWorkListDbContext>(option =>
-{
-    option.UseNpgsql(dataSourceBuilder.Build());
-});
+    option.UseNpgsql(dataSourceBuilder.Build())
+);
 builder.Services.AddScoped<HouseWorkService>();
 
 builder.Services.AddControllers();
