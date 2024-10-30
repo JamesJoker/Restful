@@ -1,6 +1,7 @@
 ﻿using HouseWorkAPI.Modules.Services;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc;
+using HouseWorkAPI.Models;
 
 namespace HouseWorkAPI.Controllers
 {
@@ -22,6 +23,39 @@ namespace HouseWorkAPI.Controllers
         public IActionResult GetMember(int id)
         {
             return Ok(JsonConvert.SerializeObject(_houseWorkService.GetMember(id)));
+        }
+
+        [HttpPost]
+        [Route("member")]
+        public IActionResult CreateMember([FromBody]string name)
+        {
+            if (_houseWorkService.AddMember(name))
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+        [HttpPut]
+        [Route("member")]
+        public IActionResult ModifyMember([FromBody] Member member)
+        {
+            if (_houseWorkService.ModifyMember(member.Id, member.Name))
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+        [HttpDelete]
+        [Route("member")]
+        public IActionResult DeleteMember(int id)
+        {
+            if (_houseWorkService.DeleteMember(id))
+            {
+                return Ok();
+            }
+            return BadRequest();
         }
 
         [HttpGet]
