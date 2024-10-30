@@ -19,7 +19,7 @@ namespace HouseWorkAPI.Models
     public class WorkInfo
     {
         public Member Owner { get; set; } = new Member();
-        public VueWork Work { get; set; } = new VueWork();
+        public Work Work { get; set; } = new Work();
     }
 
     public class DailyWork
