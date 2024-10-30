@@ -16,6 +16,14 @@ namespace HouseWorkAPI.Modules.Services
             }
         }
 
+        public List<Work> Works
+        {
+            get
+            {
+                return _dbContext.Works.ToList();
+            }
+        }
+
         public Member? GetMember(int id)
         {
             return _dbContext.Members.SingleOrDefault(m => m.Id == id);
@@ -70,7 +78,7 @@ namespace HouseWorkAPI.Modules.Services
             return true;
         }
 
-        public List<HouseWork> GetWorks(DateTimeOffset from, DateTimeOffset end)
+        public List<HouseWork> GetHouseWorks(DateTimeOffset from, DateTimeOffset end)
         {
             var works = _dbContext.HouseWorks.Where(w => w.date <= end && w.date >= from);
             if (!works.Any())

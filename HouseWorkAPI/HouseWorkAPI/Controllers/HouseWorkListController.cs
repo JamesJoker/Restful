@@ -63,7 +63,7 @@ namespace HouseWorkAPI.Controllers
         public IActionResult Works()
         {
             var now = DateTimeOffset.UtcNow;
-            return Ok(JsonConvert.SerializeObject(_houseWorkService.GetWorks(now.AddDays(-15), now.AddDays(15))));
+            return Ok(JsonConvert.SerializeObject(_houseWorkService.Works));
         }
     }
 }
