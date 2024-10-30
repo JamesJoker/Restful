@@ -27,7 +27,7 @@ namespace HouseWorkAPI.Controllers
 
         [HttpPost]
         [Route("member")]
-        public IActionResult CreateMember([FromBody]string name)
+        public IActionResult CreateMember([FromBody] string name)
         {
             if (_houseWorkService.AddMember(name))
             {
@@ -66,7 +66,7 @@ namespace HouseWorkAPI.Controllers
             {
                 return Ok(JsonConvert.SerializeObject(_houseWorkService.Works));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -74,7 +74,7 @@ namespace HouseWorkAPI.Controllers
 
         [HttpPost]
         [Route("work")]
-        public IActionResult CreateWork([FromBody]Work work)
+        public IActionResult CreateWork([FromBody] Work work)
         {
             if (_houseWorkService.CreateOrModifyWork(work))
             {
