@@ -126,7 +126,8 @@ namespace HouseWorkAPI.Modules.Services
                                     (daily, member) => new WorkInfo
                                     {
                                         Owner = member,
-                                        Work = daily.work })
+                                        Work = (VueWork)daily.work
+                                    })
                                 .Where(work => work.Work.Frequence == WorkFreqenseEnum.Daily.ToString())
                                 .ToList();
 
@@ -155,12 +156,12 @@ namespace HouseWorkAPI.Modules.Services
                                     work => work.Id,
                                     (housework, work) => new { housework, work })
                                 .Join(_dbContext.Members,
-                                    daily => daily.housework.Owner,
+                                    weekly => weekly.housework.Owner,
                                     member => member.Id,
-                                    (daily, member) => new WorkInfo
+                                    (weekly, member) => new WorkInfo
                                     {
                                         Owner = member,
-                                        Work = daily.work
+                                        Work = (VueWork)weekly.work
                                     })
                                 .Where(work => work.Work.Frequence == WorkFreqenseEnum.Weekly.ToString())
                                 .ToList();
@@ -180,12 +181,12 @@ namespace HouseWorkAPI.Modules.Services
                                     work => work.Id,
                                     (housework, work) => new { housework, work })
                                 .Join(_dbContext.Members,
-                                    daily => daily.housework.Owner,
+                                    monthly => monthly.housework.Owner,
                                     member => member.Id,
-                                    (daily, member) => new WorkInfo
+                                    (monthly, member) => new WorkInfo
                                     {
                                         Owner = member,
-                                        Work = daily.work
+                                        Work = (VueWork)monthly.work
                                     })
                                 .Where(work => work.Work.Frequence == WorkFreqenseEnum.Monthly.ToString())
                                 .ToList();
