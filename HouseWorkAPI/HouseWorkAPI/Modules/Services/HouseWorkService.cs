@@ -24,7 +24,7 @@ namespace HouseWorkAPI.Modules.Services
                 List<VueWork> works = new List<VueWork>();
                 foreach (var work in list)
                 {
-                    works.Add((VueWork)work);
+                    works.Add(new VueWork(work));
                 }
                 return works;
             }
