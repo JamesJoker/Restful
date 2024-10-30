@@ -65,5 +65,39 @@ namespace HouseWorkAPI.Controllers
             var now = DateTimeOffset.UtcNow;
             return Ok(JsonConvert.SerializeObject(_houseWorkService.Works));
         }
+
+        [HttpPost]
+        [Route("work")]
+        public IActionResult CreateWork([FromBody]Work work)
+        {
+            if (_houseWorkService.CreateOrModifyWork(work))
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+        [HttpPut]
+        [Route("work")]
+        public IActionResult ModifyWork([FromBody] Work work)
+        {
+            if (_houseWorkService.CreateOrModifyWork(work))
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+        [HttpDelete]
+        [Route("work")]
+        public IActionResult DeleteWork(Work work)
+        {
+            if (_houseWorkService.DeleteWork(work))
+            {
+                return Ok();
+            }
+            return BadRequest();
+
+        }
     }
 }
