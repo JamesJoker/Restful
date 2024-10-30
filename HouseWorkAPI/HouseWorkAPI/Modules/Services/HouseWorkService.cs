@@ -16,17 +16,11 @@ namespace HouseWorkAPI.Modules.Services
             }
         }
 
-        public List<VueWork> Works
+        public List<Work> Works
         {
             get
             {
-                var list = _dbContext.Works.ToList();
-                List<VueWork> works = new List<VueWork>();
-                foreach (var work in list)
-                {
-                    works.Add(new VueWork(work));
-                }
-                return works;
+                return _dbContext.Works.ToList();
             }
         }
 
