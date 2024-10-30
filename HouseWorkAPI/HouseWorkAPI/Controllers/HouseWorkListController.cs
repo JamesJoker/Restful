@@ -23,5 +23,13 @@ namespace HouseWorkAPI.Controllers
         {
             return Ok(JsonConvert.SerializeObject(_houseWorkService.GetMember(id)));
         }
+
+        [HttpGet]
+        [Route("works")]
+        public IActionResult Works()
+        {
+            var now = DateTimeOffset.Now;
+            return Ok(JsonConvert.SerializeObject(_houseWorkService.GetWorks(now.AddDays(-15), now.AddDays(15))));
+        }
     }
 }
