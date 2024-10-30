@@ -15,4 +15,19 @@ namespace HouseWorkAPI.Models
         [Column("ownergroup")]
         public int[] OwnerGroup { get; set; } = new int[0];
     }
+
+    public class VueWork : Work
+    {
+        public string UUId
+        {
+            get
+            {
+                return Id?.ToString("D") ?? string.Empty;
+            }
+            set
+            {
+                Id = Guid.Parse(value);
+            }
+        }
+    }
 }
