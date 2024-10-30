@@ -73,7 +73,11 @@ namespace HouseWorkAPI.Modules.Services
         public List<HouseWork> GetWorks(DateTimeOffset from, DateTimeOffset end)
         {
             var works = _dbContext.HouseWorks.Where(w => w.date <= end && w.date >= from);
-            return works.ToList();
+            if (!works.Any())
+            {
+                return [];
+            }
+            return [.. works];
         }
 
         public bool CreateOrModifyHouseWork(HouseWork houseWork)
