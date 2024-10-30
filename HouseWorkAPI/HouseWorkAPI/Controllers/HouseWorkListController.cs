@@ -105,5 +105,55 @@ namespace HouseWorkAPI.Controllers
             return BadRequest();
 
         }
+
+        [HttpGet]
+        [Route("houseworks")]
+        public IActionResult GetHouseWorks([FromQuery] string? from, [FromQuery] string? end)
+        {
+            if (string.IsNullOrEmpty(from) || string.IsNullOrEmpty(end))
+            {
+                var now = DateTimeOffset.UtcNow;
+                return Ok(JsonConvert.SerializeObject(_houseWorkService.GetHouseWorks(now.AddDays(-15), now.AddDays(15))));
+            }
+            else
+            {
+                DateTimeOffset f = DateTimeOffset.Parse(from);
+                DateTimeOffset e = DateTimeOffset.Parse(end);
+                return Ok(JsonConvert.SerializeObject(_houseWorkService.GetHouseWorks(f, e)));
+            }
+        }
+
+        [HttpPost]
+        [Route("housework")]
+        public IActionResult CreateHouseWork([FromBody] HouseWork work)
+        {
+            if (_houseWorkService.CreateOrModifyHouseWork(work))
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+        [HttpPut]
+        [Route("housework")]
+        public IActionResult ModifyHouseWork([FromBody] HouseWork work)
+        {
+            if (_houseWorkService.CreateOrModifyHouseWork(work))
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+        [HttpDelete]
+        [Route("housework")]
+        public IActionResult DeleteHouseWork([FromBody] HouseWork work)
+        {
+            if (_houseWorkService.DeleteHouseWork(work))
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
     }
 }
