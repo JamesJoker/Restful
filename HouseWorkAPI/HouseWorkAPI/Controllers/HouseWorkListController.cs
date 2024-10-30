@@ -16,5 +16,12 @@ namespace HouseWorkAPI.Controllers
         {
             return Ok(JsonConvert.SerializeObject(_houseWorkService.Members));
         }
+
+        [HttpGet]
+        [Route("member/{id}")]
+        public IActionResult GetMember(int id)
+        {
+            return Ok(JsonConvert.SerializeObject(_houseWorkService.GetMember(id)));
+        }
     }
 }
