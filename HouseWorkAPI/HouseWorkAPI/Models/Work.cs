@@ -29,14 +29,5 @@ namespace HouseWorkAPI.Models
                 Id = Guid.Parse(value);
             }
         }
-
-        public VueWork() { }
-        public VueWork(Work work)
-        {
-            Id = work.Id;
-            Name = work.Name;
-            Frequence = work.Frequence;
-            OwnerGroup = work.OwnerGroup;
-        }
     }
 }
