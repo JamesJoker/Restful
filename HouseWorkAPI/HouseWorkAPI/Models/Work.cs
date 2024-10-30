@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HouseWorkAPI.Models
 {
-    [Table("Work")]
+    [Table("work")]
     public class Work
     {
         [Column("id")]
