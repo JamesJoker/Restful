@@ -62,7 +62,14 @@ namespace HouseWorkAPI.Controllers
         [Route("works")]
         public IActionResult Works()
         {
-            return Ok(JsonConvert.SerializeObject(_houseWorkService.Works));
+            try
+            {
+                return Ok(JsonConvert.SerializeObject(_houseWorkService.Works));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost]
