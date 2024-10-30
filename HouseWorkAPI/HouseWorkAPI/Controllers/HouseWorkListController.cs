@@ -62,7 +62,6 @@ namespace HouseWorkAPI.Controllers
         [Route("works")]
         public IActionResult Works()
         {
-            var now = DateTimeOffset.UtcNow;
             return Ok(JsonConvert.SerializeObject(_houseWorkService.Works));
         }
 
