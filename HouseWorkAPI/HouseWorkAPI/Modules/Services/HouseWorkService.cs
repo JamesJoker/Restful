@@ -110,6 +110,29 @@ namespace HouseWorkAPI.Modules.Services
             return true;
         }
 
+        public List<WorkCard> GetWorkCards(DateTimeOffset from, DateTimeOffset end)
+        {
+            var list = _dbContext.HouseWorks
+                            .Where(w => w.date <= end && w.date >= from)
+                            .Join(_dbContext.Works,
+                                housework => housework.Work,
+                                work => work.Id,
+                                (housework, work) => new { housework, work })
+                            .Join(_dbContext.Members,
+                                workInfo => workInfo.housework.Owner,
+                                member => member.Id,
+                                (workInfo, member) => new WorkCard
+                                {
+                                    Id = workInfo.housework.Id,
+                                    Owner = member.Name,
+                                    Name = workInfo.work.Name,
+                                    Frequency = workInfo.work.Frequence,
+                                    date = workInfo.housework.date
+                                })
+                            .ToList();
+            return list;
+        }
+
         public DailyWork GetDailyWorks() => GetDailyWorks(DateTimeOffset.UtcNow);
 
         public DailyWork GetDailyWorks(DateTimeOffset now)
