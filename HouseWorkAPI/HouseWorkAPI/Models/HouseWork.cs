@@ -39,4 +39,13 @@ namespace HouseWorkAPI.Models
         public List<WorkInfo> Works { get; set; } = new List<WorkInfo>();
         public DateTimeOffset date { get; set; }
     }
+
+    public class WorkCard
+    {
+        public Guid? Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Owner { get; set; } = string.Empty;
+        public string Frequency { get; set; } = string.Empty;
+        public DateTimeOffset date { get; set; }
+    }
 }
