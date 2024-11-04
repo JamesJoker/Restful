@@ -1,4 +1,5 @@
 ﻿using HouseWorkAPI.Enums;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HouseWorkAPI.Models
@@ -6,7 +7,9 @@ namespace HouseWorkAPI.Models
     [Table("work")]
     public class Work
     {
+        [Key]
         [Column("id")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid? Id { get; set; }
         [Column("name")]
         public string Name { get; set; } = string.Empty;

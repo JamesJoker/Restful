@@ -8,6 +8,7 @@ namespace HouseWorkAPI.Models
     {
         [Key]
         [Column("id")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid? Id { get; set; }
         [Column("ownerId")]
         public int Owner { get; set; }
