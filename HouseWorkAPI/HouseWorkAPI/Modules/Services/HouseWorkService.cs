@@ -36,7 +36,7 @@ namespace HouseWorkAPI.Modules.Services
 
         public bool AddMember(string name)
         {
-            _dbContext.Members.Add(new Member {  Name = name });
+            _dbContext.Members.Add(new Member { Name = name });
             _dbContext.SaveChanges();
             return true;
         }
@@ -161,11 +161,12 @@ namespace HouseWorkAPI.Modules.Services
                                     (daily, member) => new WorkInfo
                                     {
                                         Owner = member,
-                                        Work = daily.work })
+                                        Work = daily.work
+                                    })
                                 .Where(work => work.Work.Frequence == WorkFreqenseEnum.Daily.ToString())
                                 .ToList();
 
-            return new DailyWork() { Works = dailyworks, date = now.Date};
+            return new DailyWork() { Works = dailyworks, date = now.Date };
         }
 
         public WeeklyWork GetWeeklyWork() => GetWeeklyWork(DateTimeOffset.UtcNow);
@@ -200,7 +201,7 @@ namespace HouseWorkAPI.Modules.Services
                                 .Where(work => work.Work.Frequence == WorkFreqenseEnum.Weekly.ToString())
                                 .ToList();
 
-            return new WeeklyWork() { Works = weeklyworks, date = date};
+            return new WeeklyWork() { Works = weeklyworks, date = date };
         }
 
         public MonthlyWork GetMonthlyWork() => GetMonthlyWork(DateTimeOffset.UtcNow);
