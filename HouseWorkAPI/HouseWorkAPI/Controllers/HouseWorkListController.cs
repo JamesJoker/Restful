@@ -113,21 +113,21 @@ namespace HouseWorkAPI.Controllers
             if (string.IsNullOrEmpty(from) || string.IsNullOrEmpty(end))
             {
                 var now = DateTimeOffset.UtcNow;
-                return Ok(JsonConvert.SerializeObject(_houseWorkService.GetHouseWorks(now.AddDays(-15), now.AddDays(15))));
+                return Ok(JsonConvert.SerializeObject(_houseWorkService.GetWorkCards(now.AddDays(-7), now.AddDays(7))));
             }
             else
             {
                 DateTimeOffset f = DateTimeOffset.Parse(from);
                 DateTimeOffset e = DateTimeOffset.Parse(end);
-                return Ok(JsonConvert.SerializeObject(_houseWorkService.GetHouseWorks(f, e)));
+                return Ok(JsonConvert.SerializeObject(_houseWorkService.GetWorkCards(f, e)));
             }
         }
 
         [HttpPost]
         [Route("housework")]
-        public IActionResult CreateHouseWork([FromBody] HouseWork work)
+        public IActionResult CreateHouseWork([FromBody] WorkCard work)
         {
-            if (_houseWorkService.CreateOrModifyHouseWork(work))
+            if (_houseWorkService.CreateHouseWork(work))
             {
                 return Ok();
             }
@@ -136,9 +136,14 @@ namespace HouseWorkAPI.Controllers
 
         [HttpPut]
         [Route("housework")]
-        public IActionResult ModifyHouseWork([FromBody] HouseWork work)
+        public IActionResult ModifyHouseWork([FromBody] WorkCard work)
         {
-            if (_houseWorkService.CreateOrModifyHouseWork(work))
+            if (work.Id is null)
+            {
+                return BadRequest("Housework Id can't be null.");
+            }
+
+            if (_houseWorkService.ModifyHouseWork(work))
             {
                 return Ok();
             }
@@ -147,7 +152,7 @@ namespace HouseWorkAPI.Controllers
 
         [HttpDelete]
         [Route("housework")]
-        public IActionResult DeleteHouseWork([FromBody] HouseWork work)
+        public IActionResult DeleteHouseWork([FromBody] WorkCard work)
         {
             if (_houseWorkService.DeleteHouseWork(work))
             {

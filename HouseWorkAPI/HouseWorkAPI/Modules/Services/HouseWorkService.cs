@@ -87,23 +87,36 @@ namespace HouseWorkAPI.Modules.Services
             return [.. works];
         }
 
-        public bool CreateOrModifyHouseWork(HouseWork houseWork)
+        public bool CreateHouseWork(WorkCard work)
         {
-            if (houseWork.Id is null)
-            {
-                _dbContext.HouseWorks.Add(houseWork);
-            }
-            else
-            {
-                _dbContext.HouseWorks.Update(houseWork);
-            }
-
+            HouseWork houseWork = new HouseWork();
+            houseWork.Owner = work.OwnerId;
+            houseWork.date = work.date;
+            houseWork.Work = work.WorkId;
+            _dbContext.HouseWorks.Add(houseWork);
             _dbContext.SaveChanges();
             return true;
         }
 
-        public bool DeleteHouseWork(HouseWork houseWork)
+        public bool ModifyHouseWork(WorkCard work)
         {
+            HouseWork houseWork = new HouseWork();
+            houseWork.Id = work.Id;
+            houseWork.Owner = work.OwnerId;
+            houseWork.date = work.date;
+            houseWork.Work = work.WorkId;
+            _dbContext.HouseWorks.Update(houseWork);
+            _dbContext.SaveChanges();
+            return true;
+        }
+
+        public bool DeleteHouseWork(WorkCard work)
+        {
+            HouseWork houseWork = new HouseWork();
+            houseWork.Id = work.Id;
+            houseWork.Owner = work.OwnerId;
+            houseWork.date = work.date;
+            houseWork.Work = work.WorkId;
             _dbContext.HouseWorks.Remove(houseWork);
             _dbContext.SaveChanges();
             return true;
@@ -123,8 +136,8 @@ namespace HouseWorkAPI.Modules.Services
                                 (workInfo, member) => new WorkCard
                                 {
                                     Id = workInfo.housework.Id,
-                                    Owner = member.Name,
-                                    Name = workInfo.work.Name,
+                                    OwnerId = member.Id,
+                                    WorkId = (Guid)workInfo.work.Id,
                                     Frequency = workInfo.work.Frequence,
                                     date = workInfo.housework.date
                                 })
