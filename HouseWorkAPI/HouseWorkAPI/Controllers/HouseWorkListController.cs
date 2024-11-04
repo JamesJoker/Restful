@@ -76,7 +76,7 @@ namespace HouseWorkAPI.Controllers
         [Route("work")]
         public IActionResult CreateWork([FromBody] Work work)
         {
-            if (_houseWorkService.CreateOrModifyWork(work))
+            if (_houseWorkService.CreateWork(work))
             {
                 return Ok();
             }
@@ -87,7 +87,7 @@ namespace HouseWorkAPI.Controllers
         [Route("work")]
         public IActionResult ModifyWork([FromBody] Work work)
         {
-            if (_houseWorkService.CreateOrModifyWork(work))
+            if (_houseWorkService.ModifyWork(work))
             {
                 return Ok();
             }

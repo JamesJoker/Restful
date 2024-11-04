@@ -56,17 +56,16 @@ namespace HouseWorkAPI.Modules.Services
             return true;
         }
 
-        public bool CreateOrModifyWork(Work work)
+        public bool CreateWork(Work work)
         {
-            if(work.Id is null)
-            {
-                _dbContext.Works.Add(work);
-            }
-            else
-            {
-                _dbContext.Works.Update(work);
-            }
-            
+            _dbContext.Works.Add(work);
+            _dbContext.SaveChanges();
+            return true;
+        }
+
+        public bool ModifyWork(Work work)
+        {
+            _dbContext.Works.Update(work);
             _dbContext.SaveChanges();
             return true;
         }
