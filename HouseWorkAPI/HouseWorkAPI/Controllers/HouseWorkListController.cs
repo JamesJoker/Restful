@@ -49,7 +49,7 @@ namespace HouseWorkAPI.Controllers
 
         [HttpDelete]
         [Route("member")]
-        public IActionResult DeleteMember(int id)
+        public IActionResult DeleteMember([FromHeader]int id)
         {
             if (_houseWorkService.DeleteMember(id))
             {
