@@ -124,25 +124,33 @@ namespace HouseWorkAPI.Modules.Services
 
         public List<WorkCard> GetWorkCards(DateTimeOffset from, DateTimeOffset end)
         {
-            var list = _dbContext.HouseWorks
-                            .Where(w => w.date <= end && w.date >= from)
-                            .Join(_dbContext.Works,
-                                housework => housework.Work,
-                                work => work.Id,
-                                (housework, work) => new { housework, work })
-                            .Join(_dbContext.Members,
-                                workInfo => workInfo.housework.Owner,
-                                member => member.Id,
-                                (workInfo, member) => new WorkCard
-                                {
-                                    Id = workInfo.housework.Id,
-                                    OwnerId = member.Id,
-                                    WorkId = (Guid)workInfo.work.Id,
-                                    Frequency = workInfo.work.Frequence,
-                                    date = workInfo.housework.date
-                                })
-                            .ToList();
-            return list;
+            try
+            {
+                var list = _dbContext.HouseWorks
+                                .Where(w => w.date <= end && w.date >= from)
+                                .Join(_dbContext.Works,
+                                    housework => housework.Work,
+                                    work => work.Id,
+                                    (housework, work) => new { housework, work })
+                                .Join(_dbContext.Members,
+                                    workInfo => workInfo.housework.Owner,
+                                    member => member.Id,
+                                    (workInfo, member) => new WorkCard
+                                    {
+                                        Id = workInfo.housework.Id,
+                                        OwnerId = member.Id,
+                                        WorkId = (Guid)workInfo.work.Id,
+                                        Frequency = workInfo.work.Frequence,
+                                        date = workInfo.housework.date
+                                    })
+                                .ToList();
+                return list;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return new List<WorkCard>();
+            }
         }
 
         public DailyWork GetDailyWorks() => GetDailyWorks(DateTimeOffset.UtcNow);
