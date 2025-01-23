@@ -10,9 +10,9 @@ namespace HouseWorkAPI.Models
         [Column("id")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid? Id { get; set; }
-        [Column("ownerId")]
+        [Column("ownerid")]
         public int Owner { get; set; }
-        [Column("workId")]
+        [Column("workid")]
         public Guid Work { get; set; }
         public DateTimeOffset date { get; set; }
     }
