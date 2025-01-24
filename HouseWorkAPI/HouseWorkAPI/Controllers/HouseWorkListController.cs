@@ -113,7 +113,9 @@ namespace HouseWorkAPI.Controllers
             if (string.IsNullOrEmpty(from) || string.IsNullOrEmpty(end))
             {
                 var now = DateTimeOffset.UtcNow;
-                return Ok(JsonConvert.SerializeObject(_houseWorkService.GetWorkCards(now.AddDays(-7), now.AddDays(7))));
+                var start = now.AddDays(1 - now.DayOfYear);
+                var stop = now.AddYears(1).AddDays(0 - now.DayOfYear);
+                return Ok(JsonConvert.SerializeObject(_houseWorkService.GetWorkCards(start, stop)));
             }
             else
             {
