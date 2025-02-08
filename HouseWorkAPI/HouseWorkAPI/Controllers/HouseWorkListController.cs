@@ -96,9 +96,9 @@ namespace HouseWorkAPI.Controllers
 
         [HttpDelete]
         [Route("work")]
-        public IActionResult DeleteWork(Work work)
+        public IActionResult DeleteWork([FromHeader] int workId)
         {
-            if (_houseWorkService.DeleteWork(work))
+            if (_houseWorkService.DeleteWork(workId))
             {
                 return Ok();
             }
@@ -127,7 +127,7 @@ namespace HouseWorkAPI.Controllers
 
         [HttpPost]
         [Route("housework")]
-        public IActionResult CreateHouseWork([FromBody] WorkCard work)
+        public IActionResult CreateHouseWork([FromBody] HouseWork work)
         {
             if (_houseWorkService.CreateHouseWork(work))
             {
@@ -138,7 +138,7 @@ namespace HouseWorkAPI.Controllers
 
         [HttpPut]
         [Route("housework")]
-        public IActionResult ModifyHouseWork([FromBody] WorkCard work)
+        public IActionResult ModifyHouseWork([FromBody] HouseWork work)
         {
             if (work.Id is null)
             {
@@ -154,9 +154,9 @@ namespace HouseWorkAPI.Controllers
 
         [HttpDelete]
         [Route("housework")]
-        public IActionResult DeleteHouseWork([FromBody] WorkCard work)
+        public IActionResult DeleteHouseWork([FromHeader] Guid workId)
         {
-            if (_houseWorkService.DeleteHouseWork(work))
+            if (_houseWorkService.DeleteHouseWork(workId))
             {
                 return Ok();
             }

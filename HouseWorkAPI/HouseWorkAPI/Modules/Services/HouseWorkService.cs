@@ -70,8 +70,9 @@ namespace HouseWorkAPI.Modules.Services
             return true;
         }
 
-        public bool DeleteWork(Work work)
+        public bool DeleteWork(int workId)
         {
+            var work = _dbContext.Works.Single(w => workId == w.Id);
             _dbContext.Works.Remove(work);
             _dbContext.SaveChanges();
             return true;
@@ -87,36 +88,23 @@ namespace HouseWorkAPI.Modules.Services
             return [.. works];
         }
 
-        public bool CreateHouseWork(WorkCard work)
+        public bool CreateHouseWork(HouseWork houseWork)
         {
-            HouseWork houseWork = new HouseWork();
-            houseWork.Owner = work.OwnerId;
-            houseWork.date = work.date;
-            houseWork.Work = work.WorkId;
             _dbContext.HouseWorks.Add(houseWork);
             _dbContext.SaveChanges();
             return true;
         }
 
-        public bool ModifyHouseWork(WorkCard work)
+        public bool ModifyHouseWork(HouseWork houseWork)
         {
-            HouseWork houseWork = new HouseWork();
-            houseWork.Id = work.Id;
-            houseWork.Owner = work.OwnerId;
-            houseWork.date = work.date;
-            houseWork.Work = work.WorkId;
             _dbContext.HouseWorks.Update(houseWork);
             _dbContext.SaveChanges();
             return true;
         }
 
-        public bool DeleteHouseWork(WorkCard work)
+        public bool DeleteHouseWork(Guid workId)
         {
-            HouseWork houseWork = new HouseWork();
-            houseWork.Id = work.Id;
-            houseWork.Owner = work.OwnerId;
-            houseWork.date = work.date;
-            houseWork.Work = work.WorkId;
+            HouseWork houseWork = _dbContext.HouseWorks.Single(w => workId == w.Id);
             _dbContext.HouseWorks.Remove(houseWork);
             _dbContext.SaveChanges();
             return true;
