@@ -139,7 +139,7 @@ namespace HouseWorkAPI.Modules.Services
                                     {
                                         Id = workInfo.housework.Id,
                                         OwnerId = member.Id,
-                                        WorkId = workInfo.work.Id ?? new Guid(),
+                                        WorkId = workInfo.work.Id,
                                         Frequency = workInfo.work.Frequence,
                                         date = workInfo.housework.date
                                     })

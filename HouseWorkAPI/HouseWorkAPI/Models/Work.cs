@@ -10,7 +10,7 @@ namespace HouseWorkAPI.Models
         [Key]
         [Column("id")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid? Id { get; set; }
+        public int Id { get; set; }
         [Column("name")]
         public string Name { get; set; } = string.Empty;
         [Column("frequence")]

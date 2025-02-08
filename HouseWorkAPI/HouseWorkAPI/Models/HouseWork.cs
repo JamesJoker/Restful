@@ -13,7 +13,7 @@ namespace HouseWorkAPI.Models
         [Column("ownerid")]
         public int Owner { get; set; }
         [Column("workid")]
-        public Guid Work { get; set; }
+        public int Work { get; set; }
         public DateTimeOffset date { get; set; }
     }
 
@@ -44,7 +44,7 @@ namespace HouseWorkAPI.Models
     public class WorkCard
     {
         public Guid? Id { get; set; }
-        public Guid WorkId { get; set; }
+        public int WorkId { get; set; }
         public int OwnerId { get; set; }
         public string Frequency { get; set; } = string.Empty;
         public DateTimeOffset date { get; set; }
