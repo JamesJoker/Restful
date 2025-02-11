@@ -13,8 +13,8 @@ namespace HouseWorkAPI.Models
         public int Id { get; set; }
         [Column("name")]
         public string Name { get; set; } = string.Empty;
-        [Column("frequence")]
-        public string Frequence { get; set; } = string.Empty;
+        [Column("frequency")]
+        public string Frequency { get; set; } = string.Empty;
         [Column("ownergroup")]
         public int[] OwnerGroup { get; set; } = new int[0];
     }

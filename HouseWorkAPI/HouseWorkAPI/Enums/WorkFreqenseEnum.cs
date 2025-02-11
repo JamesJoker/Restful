@@ -1,6 +1,6 @@
 ﻿namespace HouseWorkAPI.Enums
 {
-    public enum WorkFreqenseEnum
+    public enum WorkFreqencyEnum
     {
         Daily,
         Weekly,

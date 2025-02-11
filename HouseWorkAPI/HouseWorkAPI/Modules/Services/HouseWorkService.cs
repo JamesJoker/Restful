@@ -128,7 +128,7 @@ namespace HouseWorkAPI.Modules.Services
                                         Id = workInfo.housework.Id,
                                         OwnerId = member.Id,
                                         WorkId = workInfo.work.Id,
-                                        Frequency = workInfo.work.Frequence,
+                                        Frequency = workInfo.work.Frequency,
                                         date = workInfo.housework.date
                                     })
                                 .ToList();
@@ -159,7 +159,7 @@ namespace HouseWorkAPI.Modules.Services
                                         Owner = member,
                                         Work = daily.work
                                     })
-                                .Where(work => work.Work.Frequence == WorkFreqenseEnum.Daily.ToString())
+                                .Where(work => work.Work.Frequency == WorkFreqencyEnum.Daily.ToString())
                                 .ToList();
 
             return new DailyWork() { Works = dailyworks, date = now.Date };
@@ -194,7 +194,7 @@ namespace HouseWorkAPI.Modules.Services
                                         Owner = member,
                                         Work = daily.work
                                     })
-                                .Where(work => work.Work.Frequence == WorkFreqenseEnum.Weekly.ToString())
+                                .Where(work => work.Work.Frequency == WorkFreqencyEnum.Weekly.ToString())
                                 .ToList();
 
             return new WeeklyWork() { Works = weeklyworks, date = date };
@@ -219,7 +219,7 @@ namespace HouseWorkAPI.Modules.Services
                                         Owner = member,
                                         Work = daily.work
                                     })
-                                .Where(work => work.Work.Frequence == WorkFreqenseEnum.Monthly.ToString())
+                                .Where(work => work.Work.Frequency == WorkFreqencyEnum.Monthly.ToString())
                                 .ToList();
 
             return new MonthlyWork() { Works = monthlyworks, date = now };
